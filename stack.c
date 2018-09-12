@@ -36,3 +36,25 @@ Status Push(Sqstack &S, SElemType e){
 	*S.top++ = e;
 	return OK;
 }
+
+Status Pop(SqStack &S, SElemType &e){
+	// 若栈不空，则删除S的栈顶元素，用e返回其值，并返回OK；否则返回ERROR
+	if(S.top == S.base) return ERROR;
+	e = * --S.top;
+	return OK;
+}
+
+// 数制转换
+void conversion(){
+	// 输入一个非负十进制整数，打印输出与其等值的八进制数
+	InitStack(S); //构造空栈
+	scanf("%d", N);
+	while(N){
+		Push(S, N % 8);
+		N = N / 8;
+	}
+	while(!StackEmpty(S)){
+		Pop(S,e);
+		printf("%d", e);
+	}
+}
