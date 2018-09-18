@@ -1,9 +1,14 @@
 #!/usr/bin/make -f
 
-cfiles=$(wildcard *.c)
-# $<表示依赖
-all: choice_strcpy.c
-	$(CC) $<
+cfiles := $(wildcard *.c)
+# $<表示第一个依赖
+# $^表示所有依赖
+TARGET := $(patsubst %.c, %, $(cfiles))
+
+all: $(TARGET)
+
+$(TARGET): $(cfiles)
+	$(CC) -o $@ $^
 
 test:
 	# to test anything i don`t understand
